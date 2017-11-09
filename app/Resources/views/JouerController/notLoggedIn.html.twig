@@ -1,0 +1,14 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}GRANNIES{% endblock %}
+
+{% block body %}
+
+    <div class="Aligner" style="flex-flow: column;height: 100vh;">
+        <h1>GRANNIES</h1>
+        <br>
+        <h2>Vous n'êtes pas connecté!</h2>
+        <a href="{{ path('fos_user_security_login') }}"><button class="btn btn-danger">Login</button></a>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,68 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}GRANNIES{% endblock %}
+
+{% block body %}
+    <nav class="navbar navbar-dark navbar-expand-lg">
+        <a class="navbar-brand" href="#"><img src="{{ asset('images/grannieslogo.svg') }}" alt="logo" width="100px"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar1">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbar1">
+            <ul class="navbar-nav ml-auto">
+                {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                    <li class="nav-item" style="text-align: center;"><span class="navbar-text" style="color:white;">{{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }}</span></li>
+                    <li class="nav-item"><a target="_blank" class="nav-link" href="{{ path('fos_user_profile_show') }}">Profil</a></li>
+                    <li class="nav-item"><a target="_blank" class="nav-link" href="{{ path('fos_user_security_logout') }}">
+                            {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}</a></li>
+                    <li class="nav-item">
+                        <a target="_blank" class="nav-link" href="#">Site Promo</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item"><a target="_blank" class="nav-link" href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ path('fos_user_registration_register') }}">{{ 'layout.register'|trans({}, 'FOSUserBundle') }}</a></li>
+                    <li class="nav-item">
+                        <a target="_blank" class="nav-link" href="#">Site Promo</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+
+    <div class="Aligner" style="flex-flow: column;height: 100vh;">
+        <h1 style="margin-bottom: 50px;">Menu</h1>
+        <h3 style="margin-bottom: 25px;">Liste des jeux</h3>
+
+        <table border="1">
+            <style>td{
+                    padding: 10px;
+                }</style>
+            {% for unePartie in toutesparties if unePartie.joueur1 == user.username or unePartie.joueur2 == user.username %}
+                <tr>
+                    <td><strong>Partie numéro : </strong>{{ unePartie.id }}</td>
+                    <td>
+                        <strong>Etat : </strong>
+                        {% if unePartie.encours == true %}
+                        En cours
+                        {%  else %}
+                        Terminée
+                        {%  endif %}
+                    </td>
+                    <td><strong>Joueur 1 : </strong>{{ unePartie.joueur1 }}</td>
+                    <td><strong>Joueur 2 : </strong>{{ unePartie.joueur2 }}</td>
+                    <td><strong>Tour à : </strong>{{ unePartie.tourJoueur }}</td>
+                    <td><strong>Début de partie : </strong>{{ unePartie.debutPartie|date('Y-m-d') }}</td>
+                    {% if unePartie.gagnant != null %}
+                        <td><strong>Gagnant : </strong>{{ unePartie.gagnant }}</td>
+                        {% else %}
+                            <td><a style="border:none;" target="_blank" href="afficher/{{ unePartie.id }}"><button class="btn btn-success">Jouer</button></a></td>
+                    {% endif %}
+                </tr>
+            {% endfor %}
+        </table>
+
+        <a href="http://localhost/jeu/web/app_dev.php/jouer/nouvelle-partie"><button class="btn btn-info" style="margin-top: 25px;">Nouvelle partie</button></a>
+
+    </div>
+
+{% endblock %}

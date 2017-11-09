@@ -1,0 +1,280 @@
+/* Welcome to Compass.
+ * In this file you should write your main styles. (or centralize your imports)
+ * Import this file using the following HTML or equivalent:
+ * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
+
+// @import "compass/reset"; pas besoin il y a knacss
+
+/* Add some margin to the page and set a default font and colour */
+
+body {
+  margin: 30px;
+  background-color: #F6EDED;
+}
+
+/* Main content area */
+
+nav{
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+}
+
+#content {
+  margin: 80px 70px;
+  text-align: center;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* Header/footer boxes */
+
+.wideBox {
+  clear: both;
+  text-align: center;
+  margin: 70px;
+  padding: 10px;
+  background: #ebedf2;
+  border: 1px solid #333;
+}
+
+.wideBox h1 {
+  font-weight: bold;
+  margin: 20px;
+  color: #eaeaea;
+  font-size: 1.5em;
+}
+
+/* Slots for final card positions */
+
+#cardSlots {
+  background: #67a1d6;
+}
+
+#cardSlots2 {
+  background: #67a1d6;
+  margin-bottom: 12px;
+}
+
+/* The initial pile of unsorted cards */
+
+#cardPile {
+  margin: 25px auto 0 auto;
+}
+
+#cardPile2 {
+  margin-bottom: 25px;
+}
+
+#cardSlots, #cardPile {
+  height: 120px;
+  padding: 20px;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  -moz-box-shadow: 0 0 .3em rgba(0, 0, 0, .3);
+  -webkit-box-shadow: 0 0 .3em rgba(0, 0, 0, .3);
+  box-shadow: 0 0 .3em rgba(0, 0, 0, .3);
+}
+
+#cardSlots2, #cardPile2 {
+  height: 120px;
+  padding: 20px;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  -moz-box-shadow: 0 0 .3em rgba(0, 0, 0, .3);
+  -webkit-box-shadow: 0 0 .3em rgba(0, 0, 0, .3);
+  box-shadow: 0 0 .3em rgba(0, 0, 0, .3);
+}
+
+/* Apples container */
+
+#apples{
+  background: #929B61;
+  height: 60px;
+  padding: 20px;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  -moz-box-shadow: 0 0 .3em rgba(0, 0, 0, .3);
+  -webkit-box-shadow: 0 0 .3em rgba(0, 0, 0, .3);
+  box-shadow: 0 0 .3em rgba(0, 0, 0, .3);
+  margin-bottom: 10px;
+}
+
+/* Individual apples */
+
+#apples div{
+  float: left;
+  height: 40px;
+  width: 58px;
+  padding: 10px;
+  padding-bottom: 0;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  margin: -10px 0px 0px 10px;
+  -moz-box-shadow: 0 0 .3em rgba(0, 0, 0, .3);
+  -webkit-box-shadow: 0 0 .3em rgba(0, 0, 0, .3);
+  box-shadow: 0 0 .3em rgba(0, 0, 0, .3);
+}
+#apples div:first-child{
+  margin: -10px 0px 0px 0px;
+}
+
+#apples img{
+  position: absolute;
+  left: 9px;
+  top: 0;
+}
+
+/* Individual cards and slots */
+
+#cardSlots div, #cardPile div {
+  float: left;
+  width: 58px;
+  height: 78px;
+  padding: 10px;
+  padding-top: 40px;
+  padding-bottom: 0;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  margin: 0 0 0 10px;
+  background: #fff;
+  -moz-box-shadow: 0 0 .3em rgba(0, 0, 0, .3);
+  -webkit-box-shadow: 0 0 .3em rgba(0, 0, 0, .3);
+  box-shadow: 0 0 .3em rgba(0, 0, 0, .3);
+}
+
+#cardSlots2 div, #cardPile2 div {
+  float: left;
+  width: 58px;
+  height: 78px;
+  padding: 10px;
+  padding-top: 40px;
+  padding-bottom: 0;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  margin: 0 0 0 10px;
+  background: #fff;
+  -moz-box-shadow: 0 0 .3em rgba(0, 0, 0, .3);
+  -webkit-box-shadow: 0 0 .3em rgba(0, 0, 0, .3);
+  box-shadow: 0 0 .3em rgba(0, 0, 0, .3);
+}
+
+#cardSlots div:first-child, #cardPile div:first-child {
+  margin-left: 0;
+}
+
+#cardSlots div.hovered {
+  background: #aaa;
+}
+
+#cardSlots div {
+  border-width: 1px;
+  border-style: dashed;
+}
+
+#cardSlots2 div:first-child, #cardPile2 div:first-child {
+  margin-left: 0;
+}
+
+#cardSlots2 div.hovered {
+  background: #aaa;
+}
+
+#cardSlots2 div {
+  border-width: 1px;
+  border-style: dashed;
+}
+
+#cardPile div {
+  background: #fff;
+  color: #fff;
+  font-size: 30px;
+  text-shadow: 0 0 3px #000;
+}
+
+#cardPile div.ui-draggable-dragging {
+  -moz-box-shadow: 0 0 .5em rgba(0, 0, 0, .4);
+  -webkit-box-shadow: 0 0 .5em rgba(0, 0, 0, .4);
+  box-shadow: 0 0 .5em rgba(0, 0, 0, .4);
+}
+
+#cardPile2 div {
+  background: #fff;
+  color: #fff;
+  font-size: 30px;
+  text-shadow: 0 0 3px #000;
+}
+
+#cardPile2 div.ui-draggable-dragging {
+  -moz-box-shadow: 0 0 .5em rgba(0, 0, 0, .4);
+  -webkit-box-shadow: 0 0 .5em rgba(0, 0, 0, .4);
+  box-shadow: 0 0 .5em rgba(0, 0, 0, .4);
+}
+
+/* Individually coloured cards */
+
+#card1.correct { background: red; }
+#card2.correct { background: brown; }
+#card3.correct { background: orange; }
+#card4.correct { background: yellow; }
+#card5.correct { background: green; }
+#card6.correct { background: cyan; }
+#card7.correct { background: blue; }
+#card8.correct { background: indigo; }
+#card9.correct { background: purple; }
+#card10.correct { background: violet; }
+
+
+/* "You did it!" message */
+#successMessage {
+  margin-top: -100vh;
+  width: 0;
+  height: 0;
+  z-index: 100;
+  background: #dfd;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  -moz-box-shadow: .3em .3em .5em rgba(0, 0, 0, .8);
+  -webkit-box-shadow: .3em .3em .5em rgba(0, 0, 0, .8);
+  box-shadow: .3em .3em .5em rgba(0, 0, 0, .8);
+  padding: 20px;
+}
+
+.Aligner{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bg-inverse{
+  background-color: #929B61 !important;
+}
+
+#deck{
+  position: absolute;
+  top: 400px;
+  left: 87vw;
+  background: #67a1d6;
+  color: #fff;
+  font-size: 20px;
+  text-shadow: 0 0 3px #000;
+  -moz-box-shadow: 0 0 .5em rgba(0, 0, 0, .4);
+  -webkit-box-shadow: 0 0 .5em rgba(0, 0, 0, .4);
+  box-shadow: 0 0 .5em rgba(0, 0, 0, .4);
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  width: 58px;
+  height: 78px;
+  padding-top: 40px;
+  padding-bottom: 0;
+  margin: 0 0 0 10px;
+}

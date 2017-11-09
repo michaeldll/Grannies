@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="author" content="Michael de Laborde">
+  <title>Card Game</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+  <link href="stylesheets/screen.css" rel="stylesheet">
+</head>
+<body>
+
+<nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse ">
+  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <a class="navbar-brand" href="#">GRANNIES</a>
+
+  <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<div id="content">
+  <div class="Aligner">
+    <div id="cardPile2"></div>
+  </div>
+  <div class="Aligner">
+    <div id="cardSlots2"></div>
+  </div>
+
+  <div class="Aligner">
+    <div id="apples"></div>
+  </div>
+
+  <div class="Aligner">
+    <div id="cardSlots"></div>
+  </div>
+  <div class="Aligner">
+    <div id="cardPile"></div>
+  </div>
+
+  <div id="deck" style="text-align: center;">Deck</div>
+
+  <div class="Aligner">
+    <div id="successMessage">
+      <h2>You did it!</h2>
+      <button onclick="init()">Play Again!</button>
+    </div>
+  </div>
+</div>
+
+<script
+        src="https://code.jquery.com/jquery-2.2.4.min.js"
+        integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+<script
+        src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+        integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
+        crossorigin="anonymous"></script>
+
+<script>
+    var correctCards = 0;
+    var cardsHeldP1 = 0;
+    var cardsHeldP2 = 0;
+    $( init );
+
+
+
+    function init() {
+
+        // Hide the success message
+        $('#successMessage').hide();
+        $('#successMessage').css( {
+            left: '580px',
+            top: '250px',
+            width: 0,
+            height: 0
+        } );
+
+        // Reset the game
+        correctCards = 0;
+        $('#cardPile').html( '' );
+        $('#cardPile2').html( '' );
+        $('#cardSlots').html( '' );
+        $('#cardSlots2').html( '' );
+
+        // Create apples
+        var numbers = [ 1, 2, 3, 4, 5, 6, 7, 8, 9 ];
+        for (var i = 0; i <= 8; i++) {
+            $('<div>' + '<img src="images/apple.png" alt="apple" height=40px>' + '</div>').data( 'number', numbers[i] ).attr( 'id', 'apple'+numbers[i] ).appendTo( '#apples' ).draggable( {
+                containment: '#apples',
+                stack: '#apples div',
+                cursor: 'move',
+                revert: true
+            } );
+        }
+
+
+        // Create the pile of shuffled cards
+        var numbers = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ];
+        numbers.sort( function() { return Math.random() - .5 } );
+
+        var numbersNonSort = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ];
+
+        for ( var i=0; i<6; i++ ) {
+            $('<div>' + numbers[i] + '</div>').data( 'number', numbers[i] ).attr( 'id', 'card'+numbers[i] ).appendTo( '#cardPile' ).draggable( {
+                containment: '#content',
+                stack: '#cardPile div',
+                cursor: 'move',
+                revert: true
+            } );
+
+            $('<div>' + numbers[i] + '</div>').data( 'number', numbers[i] ).attr( 'id', 'cardP2'+numbers[i] ).appendTo( '#cardPile2' ).draggable( {
+                containment: '#content',
+                stack: '#cardPile2 div',
+                cursor: 'move',
+                revert: true
+            } );
+
+        }
+
+        // Create the card slots
+        var words = [ '', '', '', '', '', '', '', '', '', '' ];
+        for ( var i=1; i<=9; i++ ) {
+            $('<div>' + words[i-1] + '</div>').data( 'number', i ).attr( 'id', 'slot'+numbersNonSort[i] ).appendTo( '#cardSlots' ).droppable( {
+                accept: '#cardPile div',
+                hoverClass: 'hovered',
+
+                //handle Card Drop
+                drop: function( event, ui ) {
+
+                    // Card numbers
+                    //var numbers = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ];
+
+                    // Grab the slot number and card number
+                    var slotNumber = $(this).data('number');
+                    var cardNumber = ui.draggable.data('number');
+
+
+                    //When the card is dropped to any slot,
+                    //change the card colour, position it directly
+                    //on top of the slot and prevent it being dragged again
+                    ui.draggable.addClass('correct');
+                    ui.draggable.draggable('disable');
+                    $(this).droppable('disable');
+                    ui.draggable.position({
+                        of: $(this), my: 'left top', at: 'left top'
+                    });
+
+                    //This prevents the card from being
+                    //pulled back to its initial position
+                    //once it has been dropped
+                    ui.draggable.draggable('option', 'revert', false);
+
+                    //$('#card'+cardNumber).detach();
+                    $('#slot'+slotNumber).append( $('#card'+cardNumber) );
+                    $('#card'+cardNumber).css('left','-11px').css('top','-41px');
+
+
+                    correctCards++; // Increment keep track correct cards
+                    cardsHeldP1--;// Decrement cards held by player 1
+
+                    // Random int
+                    var i = randomIntFromInterval(1,9);
+
+                    // Generate a new card
+                    $('<div>' + numbers[i] + '</div>').data( 'number', numbers[i] ).attr( 'id', 'card'+numbers[i] ).appendTo( '#cardPile' ).draggable( {
+                        containment: '#content',
+                        stack: '#cardPile div',
+                        cursor: 'move',
+                        revert: true
+                    } );
+
+                }
+
+            } );
+
+            // Card pile 2
+            $('<div>' + words[i-1] + '</div>').data( 'number', i ).appendTo( '#cardSlots2' ).droppable( {
+                accept: '#cardPile2 div',
+                hoverClass: 'hovered',
+                drop: handleCardDrop2
+            } );
+
+            cardsHeldP1 = 6;
+            cardsHeldP2 = 6;
+
+        }
+
+        // Pick between 1 and 10
+        function randomIntFromInterval(min,max)
+        {
+            return Math.floor(Math.random() * max) + min  ;
+        }
+
+        // HANDLE CARD DROP
+
+        // $( function() {
+        //   $( "#droppable" ).droppable({
+        //     drop: function( event, ui ) {
+        //       $( this )
+        //         .addClass( "ui-state-highlight" )
+        //         .find( "p" )
+        //           .html( "Dropped!" );
+        //     }
+        //   });
+        // } );
+
+
+
+      /*  function handleCardDrop(event, ui) {
+
+       // Card numbers
+       var numbers = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ];
+
+       // Grab the slot number and card number
+       var slotNumber = $(this).data('number');
+       var cardNumber = ui.draggable.data('number');
+
+       //If the card was dropped to any slot,
+       //change the card colour, position it directly
+       //on top of the slot and prevent it being dragged again
+       if (slotNumber === cardNumber || slotNumber != cardNumber ) {
+
+       //console.log("slotnumber is "+slotNumber);
+       //console.log("cardnumber is "+cardNumber);
+       ui.draggable.addClass('correct');
+       //console.log("addclasscorrect");
+       ui.draggable.draggable('disable');
+       //console.log("draggabledisable");
+       $(this).droppable('disable');
+       console.log("this droppable disable, donc bon");
+       ui.draggable.position({
+       of: $(this), my: 'left top', at: 'left top'
+       });
+
+       //This prevents the card from being
+       //pulled back to its initial position
+       //once it has been dropped
+       ui.draggable.draggable('option', 'revert', false);
+
+       //This reattaches the card to the proper div
+       // console.log($(this));
+       $('#card'+cardNumber).detach();
+       $(this).append( $('#card'+cardNumber) );
+       $('#card'+cardNumber).css('left','-11px').css('top','-41px');
+
+       correctCards++; // Increment keep track correct cards
+       cardsHeldP1--;// Decrement cards held by player 1
+
+       // Random int
+       var i = randomIntFromInterval(1,9);
+
+       // Generate a new card
+       $('<div>' + numbers[i] + '</div>').data( 'number', numbers[i] ).attr( 'id', 'card'+numbers[i] ).appendTo( '#cardPile' ).draggable( {
+       containment: '#content',
+       stack: '#cardPile div',
+       cursor: 'move',
+       revert: true
+       } );
+
+       } //endif
+       } //endCardDrop*/
+
+        function handleCardDrop2() {
+
+        }
+
+        //If all the cards have been placed correctly then
+        //display a message and reset the cards for
+        //another go
+        if (correctCards === 20) {
+            $('#successMessage').show();
+            $('#successMessage').animate({
+                left: '380px',
+                top: '200px',
+                width: '400px',
+                height: '100px',
+                opacity: 1
+            });
+        }
+
+    }
+
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,12 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}GRANNIES{% endblock %}
+
+{% block body %}
+<h1>GRANNIES</h1>
+
+    {{ form_start(form) }}      {# Ouverture du formulaire, balise form #}
+        {{ form_widget(form) }} {# Ecriture des champs #}
+        <input type="submit" value="Créer partie" /> {# ajout du champ submit #}
+    {{ form_end(form) }}        {# fermeture du formulaire #}
+{% endblock %}

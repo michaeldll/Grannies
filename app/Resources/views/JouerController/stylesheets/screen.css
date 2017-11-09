@@ -1,0 +1,338 @@
+/* Welcome to Compass.
+ * In this file you should write your main styles. (or centralize your imports)
+ * Import this file using the following HTML or equivalent:
+ * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
+/* Add some margin to the page and set a default font and colour */
+/* line 10, ../sass/screen.scss */
+body {
+  margin: 30px;
+  background-color: #F6EDED;
+}
+
+/* Main content area */
+/* line 17, ../sass/screen.scss */
+nav {
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+}
+
+/* line 23, ../sass/screen.scss */
+#content {
+  margin: 80px 70px;
+  text-align: center;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* Header/footer boxes */
+/* line 33, ../sass/screen.scss */
+.wideBox {
+  clear: both;
+  text-align: center;
+  margin: 70px;
+  padding: 10px;
+  background: #ebedf2;
+  border: 1px solid #333;
+}
+
+/* line 42, ../sass/screen.scss */
+.wideBox h1 {
+  font-weight: bold;
+  margin: 20px;
+  color: #eaeaea;
+  font-size: 1.5em;
+}
+
+/* Slots for final card positions */
+/* line 51, ../sass/screen.scss */
+#cardSlots {
+  background: #67a1d6;
+}
+
+/* line 55, ../sass/screen.scss */
+#cardSlots2 {
+  background: #67a1d6;
+  margin-bottom: 12px;
+}
+
+/* The initial pile of unsorted cards */
+/* line 62, ../sass/screen.scss */
+#cardPile {
+  margin: 25px auto 0 auto;
+}
+
+/* line 66, ../sass/screen.scss */
+#cardPile2 {
+  margin-bottom: 25px;
+}
+
+/* line 70, ../sass/screen.scss */
+#cardSlots, #cardPile {
+  height: 120px;
+  padding: 20px;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  -moz-box-shadow: 0 0 0.3em rgba(0, 0, 0, 0.3);
+  -webkit-box-shadow: 0 0 0.3em rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 0.3em rgba(0, 0, 0, 0.3);
+}
+
+/* line 81, ../sass/screen.scss */
+#cardSlots2, #cardPile2 {
+  height: 120px;
+  padding: 20px;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  -moz-box-shadow: 0 0 0.3em rgba(0, 0, 0, 0.3);
+  -webkit-box-shadow: 0 0 0.3em rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 0.3em rgba(0, 0, 0, 0.3);
+}
+
+/* Apples container */
+/* line 94, ../sass/screen.scss */
+#apples {
+  background: #929B61;
+  height: 60px;
+  padding: 20px;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  -moz-box-shadow: 0 0 0.3em rgba(0, 0, 0, 0.3);
+  -webkit-box-shadow: 0 0 0.3em rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 0.3em rgba(0, 0, 0, 0.3);
+  margin-bottom: 10px;
+}
+
+/* Individual apples */
+/* line 109, ../sass/screen.scss */
+#apples div {
+  float: left;
+  height: 40px;
+  width: 58px;
+  padding: 10px;
+  padding-bottom: 0;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  margin: -10px 0px 0px 10px;
+  -moz-box-shadow: 0 0 0.3em rgba(0, 0, 0, 0.3);
+  -webkit-box-shadow: 0 0 0.3em rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 0.3em rgba(0, 0, 0, 0.3);
+}
+
+/* line 123, ../sass/screen.scss */
+#apples div:first-child {
+  margin: -10px 0px 0px 0px;
+}
+
+/* line 127, ../sass/screen.scss */
+#apples img {
+  position: absolute;
+  left: 9px;
+  top: 0;
+}
+
+/* Individual cards and slots */
+/* line 135, ../sass/screen.scss */
+#cardSlots div, #cardPile div {
+  float: left;
+  width: 58px;
+  height: 78px;
+  padding: 10px;
+  padding-top: 40px;
+  padding-bottom: 0;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  margin: 0 0 0 10px;
+  background: #fff;
+  -moz-box-shadow: 0 0 0.3em rgba(0, 0, 0, 0.3);
+  -webkit-box-shadow: 0 0 0.3em rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 0.3em rgba(0, 0, 0, 0.3);
+}
+
+/* line 152, ../sass/screen.scss */
+#cardSlots2 div, #cardPile2 div {
+  float: left;
+  width: 58px;
+  height: 78px;
+  padding: 10px;
+  padding-top: 40px;
+  padding-bottom: 0;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  margin: 0 0 0 10px;
+  background: #fff;
+  -moz-box-shadow: 0 0 0.3em rgba(0, 0, 0, 0.3);
+  -webkit-box-shadow: 0 0 0.3em rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 0.3em rgba(0, 0, 0, 0.3);
+}
+
+/* line 169, ../sass/screen.scss */
+#cardSlots div:first-child, #cardPile div:first-child {
+  margin-left: 0;
+}
+
+/* line 173, ../sass/screen.scss */
+#cardSlots div.hovered {
+  background: #aaa;
+}
+
+/* line 177, ../sass/screen.scss */
+#cardSlots div {
+  border-width: 1px;
+  border-style: dashed;
+}
+
+/* line 182, ../sass/screen.scss */
+#cardSlots2 div:first-child, #cardPile2 div:first-child {
+  margin-left: 0;
+}
+
+/* line 186, ../sass/screen.scss */
+#cardSlots2 div.hovered {
+  background: #aaa;
+}
+
+/* line 190, ../sass/screen.scss */
+#cardSlots2 div {
+  border-width: 1px;
+  border-style: dashed;
+}
+
+/* line 195, ../sass/screen.scss */
+#cardPile div {
+  background: #fff;
+  color: #fff;
+  font-size: 30px;
+  text-shadow: 0 0 3px #000;
+}
+
+/* line 202, ../sass/screen.scss */
+#cardPile div.ui-draggable-dragging {
+  -moz-box-shadow: 0 0 0.5em rgba(0, 0, 0, 0.4);
+  -webkit-box-shadow: 0 0 0.5em rgba(0, 0, 0, 0.4);
+  box-shadow: 0 0 0.5em rgba(0, 0, 0, 0.4);
+}
+
+/* line 208, ../sass/screen.scss */
+#cardPile2 div {
+  background: #fff;
+  color: #fff;
+  font-size: 30px;
+  text-shadow: 0 0 3px #000;
+}
+
+/* line 215, ../sass/screen.scss */
+#cardPile2 div.ui-draggable-dragging {
+  -moz-box-shadow: 0 0 0.5em rgba(0, 0, 0, 0.4);
+  -webkit-box-shadow: 0 0 0.5em rgba(0, 0, 0, 0.4);
+  box-shadow: 0 0 0.5em rgba(0, 0, 0, 0.4);
+}
+
+/* Individually coloured cards */
+/* line 223, ../sass/screen.scss */
+#card1.correct {
+  background: red;
+}
+
+/* line 224, ../sass/screen.scss */
+#card2.correct {
+  background: brown;
+}
+
+/* line 225, ../sass/screen.scss */
+#card3.correct {
+  background: orange;
+}
+
+/* line 226, ../sass/screen.scss */
+#card4.correct {
+  background: yellow;
+}
+
+/* line 227, ../sass/screen.scss */
+#card5.correct {
+  background: green;
+}
+
+/* line 228, ../sass/screen.scss */
+#card6.correct {
+  background: cyan;
+}
+
+/* line 229, ../sass/screen.scss */
+#card7.correct {
+  background: blue;
+}
+
+/* line 230, ../sass/screen.scss */
+#card8.correct {
+  background: indigo;
+}
+
+/* line 231, ../sass/screen.scss */
+#card9.correct {
+  background: purple;
+}
+
+/* line 232, ../sass/screen.scss */
+#card10.correct {
+  background: violet;
+}
+
+/* "You did it!" message */
+/* line 236, ../sass/screen.scss */
+#successMessage {
+  margin-top: -100vh;
+  width: 0;
+  height: 0;
+  z-index: 100;
+  background: #dfd;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  -moz-box-shadow: 0.3em 0.3em 0.5em rgba(0, 0, 0, 0.8);
+  -webkit-box-shadow: 0.3em 0.3em 0.5em rgba(0, 0, 0, 0.8);
+  box-shadow: 0.3em 0.3em 0.5em rgba(0, 0, 0, 0.8);
+  padding: 20px;
+}
+
+/* line 251, ../sass/screen.scss */
+.Aligner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* line 257, ../sass/screen.scss */
+.bg-inverse {
+  background-color: #929B61 !important;
+}
+
+/* line 261, ../sass/screen.scss */
+#deck {
+  position: absolute;
+  top: 400px;
+  left: 87vw;
+  background: #67a1d6;
+  color: #fff;
+  font-size: 20px;
+  text-shadow: 0 0 3px #000;
+  -moz-box-shadow: 0 0 0.5em rgba(0, 0, 0, 0.4);
+  -webkit-box-shadow: 0 0 0.5em rgba(0, 0, 0, 0.4);
+  box-shadow: 0 0 0.5em rgba(0, 0, 0, 0.4);
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  width: 58px;
+  height: 78px;
+  padding-top: 40px;
+  padding-bottom: 0;
+  margin: 0 0 0 10px;
+}

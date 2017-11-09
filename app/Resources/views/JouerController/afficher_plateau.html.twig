@@ -1,0 +1,315 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}GRANNIES{% endblock %}
+
+{% block body %}
+
+    <!-- Bootstrap v4 Beta navbar -->
+
+    <nav class="navbar navbar-dark">
+        <a class="navbar-brand" href="#"><img src="{{ asset('images/grannieslogo.svg') }}" alt="logo" width="100px"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar1">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbar1">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Site Promo</a>
+                    <a class="nav-link" href="#">Profil</a>
+                    <a class="nav-link" href="#">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+
+    <div id="content">
+
+        <div class="Aligner">
+            <h1 class="enCours">Partie en cours</h1>
+        </div>
+
+        <!-- Nom joueur -->
+
+        <div class="Aligner nomJoueur">
+            <h2>Adversaire: <strong>{{ adversaire.username }}</strong></h2>
+        </div>
+
+        <!-- Bornes adversaire -->
+
+        <div class="Aligner">
+            <div id="applesAdversaire" class="bornes Aligner">
+                {% for borne in tbornes %}
+                    <div class="borne">
+
+                        {% if etatborne[borne.ordre].position == nomadversaire %}
+                            <img src="{{ asset('images/') }}{{ borne.image }}" alt="apple here" height="40px" class="borneAdversaire">
+                        {% else %}
+                            -
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Terrain adversaire -->
+
+        <div class="terrain Aligner">
+            {% for i in 1..9 %}
+                <div id="cardSlots2" class="colonne">
+                    {% for carte_id in terrainadversaire['col'~i] %}
+                        <div class="carte">
+                            {% if carte_id == 0 %}
+                                Libre
+                            {% else %}
+                                <img src="{{ asset('images/') }}{{ tcartes[carte_id].image }}/{{ tcartes[carte_id].couleur.libelle }}.jpg" alt="image ici">
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+        </div>
+
+        <!-- Bornes -->
+
+        {% if montour == false %}
+            <style>
+                .borne{
+                    background-color: lightgray;
+                }
+            </style>
+        {% endif %}
+
+
+        <div class="Aligner">
+            <div id="applesAdversaire" class="bornes Aligner">
+                {% for borne in tbornes %}
+                    <div class="borne">
+                        {% if etatborne[borne.ordre].position == "neutre" %}
+
+                        {% if montour == false %}
+                            <img src="{{ asset('images/') }}{{ borne.image }}" alt="apple here" height="40px">
+                        {% endif %}
+
+                        {% if montour == true %}
+                            <a href="{{ path('jouer_revendiquer', {'partie': partie.id,'borne': borne.id}) }}">
+                                <img src="{{ asset('images/') }}{{ borne.image }}" alt="apple here" height="40px">
+                            </a>
+                        {% endif %}
+
+                        {% else %}
+                            -
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+      {#  <!-- Pioche -->
+        {% if montour == false %}
+            <style>
+                #deck{
+                    background-color: lightgrey;
+                }
+            </style>
+        {% endif %}
+        <div id="deck">
+            {% if montour == false %}
+                Pioche
+            {% endif %}
+
+            {% if montour == true %}
+            <a href="{{ path('jouer_piocher', {'partie': partie.id}) }}">Pioche</a>
+            {% endif %}
+        </div>#}
+
+        <!-- Terrain joueur -->
+
+        <div class="terrain Aligner">
+            {% for i in 1..9 %}
+                <div id="cardSlots" class="colonne">
+                    {% for carte_id in terrainencours['col'~i] %}
+
+                        {% if carte_id == 0 %}
+                            <div class="carte zonelibre" data-colonne = "{{ i }}">
+                                Libre
+                            </div>
+                        {% else %}
+                            <div class="carte">
+                                <img src="{{ asset('images/') }}{{ tcartes[carte_id].image }}/{{ tcartes[carte_id].couleur.libelle }}.jpg" alt="image ici">
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+
+                </div>
+            {% endfor %}
+        </div>
+
+        <!-- Bornes joueur -->
+
+        <div class="Aligner">
+            <div id="applesJoueur" class="bornes Aligner">
+                {% for borne in tbornes %}
+                    <div class="borne">
+                        {% if etatborne[borne.ordre].position == nomencours %}
+                            <img class="borneJoueurEnCours" src="{{ asset('images/') }}{{ borne.image }}" alt="apple here" height="40px">
+                        {% else %}
+                            -
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Nom joueur -->
+
+        <div class="Aligner nomJoueur">
+            <h2>Vous : <strong>{{ user.username }}</strong></h2>
+        </div>
+
+        <!-- Message d'attente -->
+
+        <div class="Aligner messageAttente">
+            {% if montour == false %}
+                <div class="alert alert-danger">En attente du tour de  l'adversaire</div>
+            {% endif %}
+        </div>
+
+        <!-- Cartes en main -->
+
+        <div class="Aligner">
+            <div id="cardPile" class="terrain Aligner">
+                {% for carte_id in mainencours %}
+                    <div class="carte mescartes" data-carte="{{ carte_id }}">
+                        <img src="{{ asset('images/') }}{{ tcartes[carte_id].image }}/{{ tcartes[carte_id].couleur.libelle }}.jpg" alt="image ici">
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+    </div>
+
+
+    <script>
+
+        // Update every 2 seconds
+
+        {% if montour == false %}
+
+        $(function () {
+            setInterval(function()
+            {
+                $.ajax({
+                    url: "{{ path('actualiser') }}",
+                    method: 'POST',
+                    data: {
+                        idjoueur: {{ user.id }},
+                        partie: {{ partie.id }}
+                    },
+                    statusCode: {
+                        404: function() {
+
+                        },
+                        200: function() {
+                            location.reload();
+                        },
+                        500: function () {
+                            console.log('err 500 actu');
+                        }
+                    }
+                })}, 2000);
+        });
+
+        {% endif %}
+
+
+
+        // jQuery UI drag & drop
+
+        $(function () {
+            $(".mescartes").draggable({
+                {% if montour == false %}
+                    containment : "#cardPile",
+                {% endif %}
+
+                {% if montour == true %}
+                containment : "#content",
+                {% endif %}
+                cursor: 'move',
+                revert: true
+            });
+            $(".zonelibre").droppable({
+                hoverClass: 'hovered',
+
+                drop: function (event, ui) {
+                    $(this).addClass("ui-state-highlight");
+                    $(this).attr('id', 'retirer');
+
+                    //When the card is dropped, change the card colour, position it directly on top of the slot and prevent it being dragged again
+                    ui.draggable.draggable('disable');
+                    $(this).droppable('disable');
+                    ui.draggable.position({
+                        of: $(this), my: 'left top', at: 'left top'
+                    });
+
+                    //Prevents the card from being pulled back to its initial position
+                    ui.draggable.draggable('option', 'revert', false);
+
+                    $.ajax({
+                        url: "{{ path('jouer_carte') }}",
+                        method: 'POST',
+                        data: {
+                            colonne: $(this).data('colonne'),
+                            carte: ui.draggable.data('carte'),
+                            partie: {{ partie.id }}
+                        },
+                        statusCode: {
+                            200: function() {
+                                var chemin = '{{ path('jouer_piocher', {'partie': partie.id})}}';
+                                window.location = 'http://localhost';
+                                location.href = chemin;
+                            },
+                            500: function () {
+                                console.log('500 drop');
+                            }
+                        }
+                    });
+                }
+            });
+        });
+
+
+        //If all the cards have been placed correctly then display a message
+
+        $.ajax({
+            url: "{{ path('findejeu') }}",
+            method: 'POST',
+            data: {
+                partie: {{ partie.id }}
+            },
+            statusCode: {
+                404: function() {
+
+                },
+                200: function() {
+                    swal({
+                        title: "Game over!",
+                        text: "{{ partie.gagnant }} remporte la partie.",
+                        icon: "info",
+                        button: "Retour au menu",
+                    }).then((value) => {
+                        var chemin = '{{ path('fos_user_profile_show')}}';
+                        window.location = 'http://localhost';
+                        location.href = chemin;
+                    });
+                    console.log('successful end game');
+                },
+                500: function () {
+                    console.log('err 500 fin de jeu');
+                }
+            }
+        });
+    </script>
+
+
+{% endblock %}
